@@ -17,21 +17,17 @@ export default function tasks() {
 
   const addTaskHandler = () => {
     if (newTask !== "") {
-      setData((prev) => [
-        ...prev,
-        { data: newTask, id: Math.floor(Math.random() * data.length) },
-      ]);
+      setData((prev) => [...prev, { data: newTask, id: Date.now() }]);
       setNewTask("");
     }
   };
 
-  // TODO: Generate unique id keys for each element
   const deleteTaskHandler = (id) => {
     setData((prev) => prev.filter((task) => task.id !== id));
   };
 
   const renderItem = ({ item }) => (
-    <View style={{ flexDirection: "row" }}>
+    <View style={styles.taskItem}>
       <BouncyCheckbox
         size={35}
         fillColor="#141736"
@@ -120,5 +116,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 23,
     textAlign: "center",
+  },
+  taskItem: {
+    flexDirection: "row",
+    marginVertical: 3,
   },
 });
